@@ -3,7 +3,9 @@ package com.digital.cursomc.domain;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Convert;
@@ -32,25 +34,36 @@ import lombok.NoArgsConstructor;
 public class Pedido extends BaseAbstractEntyti implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date instante;
-	
+
 	@Convert(converter = EstadoPagamentoConverter.class)
 	private String estado;
-	
-	@OneToOne(cascade = CascadeType.ALL,mappedBy = "pedido")
-	private Pagamento  pagamento;
-	 
-	 
- 	@JsonBackReference
+
+	@OneToOne(cascade = CascadeType.ALL, mappedBy = "pedido")
+	private Pagamento pagamento;
+
+	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name = "cliente_id")
-	private Cliente  cliente;
-	
+	private Cliente cliente;
+
 	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name = "endereco_de_entregantrega_id")
 	private Endereco enderecoEntrega;
 
+	@OneToMany(mappedBy = "id.pedido")
+	private Set<ItemPedido> itens = new HashSet<>();
+
+	public List<Pedido> pedidos(){
+		 List<Pedido> lista=new ArrayList<>();
+		 
+		 for (ItemPedido x : itens) {
+			 lista.add(x.getPedido());
+			
+		}
+		 return lista;
+	}
 }
