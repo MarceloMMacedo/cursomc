@@ -10,38 +10,33 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
+import org.dom4j.tree.BaseElement;
+
+import com.digital.cursomc.interfaces.BaseAbstractEntyti;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+@Entity
 @Data
 @NoArgsConstructor
-//@AllArgsConstructor
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@Entity
-public class Categoria implements Serializable {
+@AllArgsConstructor
+@EqualsAndHashCode(callSuper = true)
+public class Categoria extends BaseAbstractEntyti implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@EqualsAndHashCode.Include
-	private Long id;
-
-	private String nome;
+	  
 	
 	@JsonManagedReference
 	@ManyToMany(mappedBy = "categorias")
 	private List<Produto> produtos=new ArrayList<Produto>();
 
 	
-	public Categoria(String nome, List<Produto> produtos) {
-		super();
-		this.nome = nome;
-		this.produtos = produtos;
-	}
+	 
 	
 	
 }

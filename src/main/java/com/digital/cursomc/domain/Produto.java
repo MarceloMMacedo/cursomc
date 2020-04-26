@@ -12,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
+import com.digital.cursomc.interfaces.BaseAbstractEntyti;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import lombok.AllArgsConstructor;
@@ -19,19 +20,14 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+@Entity
 @Data
 @NoArgsConstructor
-//@AllArgsConstructor
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@Entity
-public class Produto implements Serializable {
+@AllArgsConstructor
+@EqualsAndHashCode(callSuper = true)
+public class Produto  extends BaseAbstractEntyti implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@EqualsAndHashCode.Include
-	private Long id;
 	
 	private String nome;
 	
@@ -44,11 +40,7 @@ public class Produto implements Serializable {
 	inverseJoinColumns = @JoinColumn(name="categotia_id"))
 	private List<Categoria> categorias=new ArrayList<>();
 
-	public Produto(String nome, double preco) {
-		super();
-		this.nome = nome;
-		this.preco = preco;
-	}
+	 
 
 	
 	
