@@ -12,7 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
-import com.digital.cursomc.interfaces.BaseAbstractEntyti;
+import com.digital.cursomc.domain.interfaces.BaseAbstractEntyti;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import lombok.AllArgsConstructor;

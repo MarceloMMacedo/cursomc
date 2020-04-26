@@ -8,7 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
-import com.digital.cursomc.interfaces.BaseAbstractEntyti;
+import com.digital.cursomc.domain.interfaces.BaseAbstractEntyti;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -23,6 +24,7 @@ public class Estado extends BaseAbstractEntyti implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
+	@JsonManagedReference
 	@OneToMany(mappedBy = "estado")
 	private List<Cidade> cidades=new ArrayList<Cidade>();
 	

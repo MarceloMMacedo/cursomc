@@ -12,7 +12,7 @@ import javax.persistence.ManyToMany;
 
 import org.dom4j.tree.BaseElement;
 
-import com.digital.cursomc.interfaces.BaseAbstractEntyti;
+import com.digital.cursomc.domain.interfaces.BaseAbstractEntyti;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.AllArgsConstructor;

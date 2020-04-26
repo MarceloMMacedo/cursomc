@@ -13,7 +13,8 @@ import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 
 import com.digital.cursomc.domain.enums.converters.TipoClienteConverter;
-import com.digital.cursomc.interfaces.BaseAbstractEntyti;
+import com.digital.cursomc.domain.interfaces.BaseAbstractEntyti;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -34,6 +35,7 @@ public class Cliente extends BaseAbstractEntyti implements Serializable {
 	@Convert(converter = TipoClienteConverter.class)
 	private String tipo;
 	
+	@JsonManagedReference
 	@OneToMany(mappedBy = "cliente")
 	private List<Endereco> enderecos=new ArrayList<Endereco>();
 	

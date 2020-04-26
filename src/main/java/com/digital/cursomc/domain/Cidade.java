@@ -9,7 +9,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
-import com.digital.cursomc.interfaces.BaseAbstractEntyti;
+import com.digital.cursomc.domain.interfaces.BaseAbstractEntyti;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -23,10 +24,12 @@ public class Cidade extends BaseAbstractEntyti implements Serializable {
  
 	private static final long serialVersionUID = 1L;
 	
+	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name="estado_id")
 	private Estado estado;
 	
+	@JsonBackReference
 	@OneToMany(mappedBy = "cidade")
 	private List<Endereco> enderecos=new ArrayList<Endereco>();
 	
