@@ -7,5 +7,5 @@ import com.digital.cursomc.domain.Produto;
 
 @Repository
 public interface ProdutoRespository extends JpaRepository<Produto, Long> {
-Produto findById(long id);
+ 
 }

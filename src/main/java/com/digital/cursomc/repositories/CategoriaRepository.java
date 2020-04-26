@@ -10,5 +10,5 @@ import com.digital.cursomc.domain.Categoria;
 @Repository
 public interface CategoriaRepository extends JpaRepository<Categoria, Long> {
  
-	Categoria findById(long id);
+//	Categoria findById(long id);
 }

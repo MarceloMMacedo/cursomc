@@ -2,6 +2,7 @@ package com.digital.cursomc.resources;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.digital.cursomc.domain.Categoria;
 import com.digital.cursomc.services.CategoriaService;
+
+import javassist.tools.rmi.ObjectNotFoundException;
 
 
 @RestController
@@ -31,8 +34,8 @@ public class CategoriaResource {
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<?> find(@PathVariable(value = "id") long id) {
-		Categoria obj = categoriaService.buscar(id);
+	public ResponseEntity<?> find(@PathVariable(value = "id") long id) throws ObjectNotFoundException {
+		Optional<Categoria> obj = categoriaService.buscar(id);
 		return ResponseEntity.ok(obj) ;
 	}
 }
