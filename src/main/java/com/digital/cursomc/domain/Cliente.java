@@ -43,5 +43,11 @@ public class Cliente extends BaseAbstractEntyti implements Serializable {
 	@ElementCollection
 	@CollectionTable(name ="TELEFONE")
 	private Set<String> telefones = new HashSet<>();
+	
+	@JsonManagedReference
+	@OneToMany(mappedBy = "cliente")
+	private List<Pedido> pedidos=new ArrayList<Pedido>();
+	
+	
 
 }

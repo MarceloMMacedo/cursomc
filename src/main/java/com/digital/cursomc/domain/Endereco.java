@@ -34,7 +34,7 @@ public class Endereco extends  BaseAbstractEntyti implements Serializable {
 
 	private String cep;
 
-	@JsonManagedReference
+	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name = "cidade_id")
 	private Cidade cidade;

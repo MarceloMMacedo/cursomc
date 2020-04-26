@@ -10,24 +10,26 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.digital.cursomc.domain.Categoria;
-import com.digital.cursomc.domain.Produto;
-import com.digital.cursomc.services.ProdutoService;
+import com.digital.cursomc.domain.Pedido;
+import com.digital.cursomc.services.PedidoService;
 
 import javassist.tools.rmi.ObjectNotFoundException;
 
+import com.digital.cursomc.services.*;
+
 
 @RestController
-@RequestMapping(value = "/produtos")
+@RequestMapping(value = "/pedidos")
  
-public class ProdutoResource {
+public class PedidoResource {
 	@Autowired
-	private ProdutoService produtoService;
+	private PedidoService pedidoService;
 
 	 
 
 	@GetMapping("/{id}")
-	public ResponseEntity<?> find(@PathVariable(value = "id") long id) throws ObjectNotFoundException {
-		Optional<Produto> obj = produtoService.buscar(id);
+	public ResponseEntity<?> find(@PathVariable(value = "id") Long id) throws ObjectNotFoundException {
+		Optional<Pedido> obj = pedidoService.buscar(id);
 		return ResponseEntity.ok(obj) ;
 	}
 }
