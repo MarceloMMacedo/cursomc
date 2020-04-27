@@ -34,6 +34,12 @@ public class Categoria extends BaseAbstractEntyti implements Serializable {
 	@ManyToMany(mappedBy = "categorias")
 	private List<Produto> produtos=new ArrayList<Produto>();
 
+
+
+	public Categoria(Long id, String nome ) {
+		super(id, nome); 
+	}
+
 	
 	 
 	
