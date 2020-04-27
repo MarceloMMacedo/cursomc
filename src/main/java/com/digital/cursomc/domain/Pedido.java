@@ -1,11 +1,7 @@
 package com.digital.cursomc.domain;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*; 
 
 import javax.persistence.CascadeType;
 import javax.persistence.Convert;
@@ -20,6 +16,7 @@ import javax.persistence.TemporalType;
 import com.digital.cursomc.domain.enums.converters.EstadoPagamentoConverter;
 import com.digital.cursomc.domain.interfaces.BaseAbstractEntyti;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.Data;
@@ -36,15 +33,17 @@ public class Pedido extends BaseAbstractEntyti implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Temporal(TemporalType.TIMESTAMP)
+	@JsonFormat(pattern="dd/MM/yyyy HH:mm")
 	private Date instante;
 
 	@Convert(converter = EstadoPagamentoConverter.class)
 	private String estado;
 
+	@JsonManagedReference
 	@OneToOne(cascade = CascadeType.ALL, mappedBy = "pedido")
 	private Pagamento pagamento;
 
-	@JsonBackReference
+	@JsonManagedReference
 	@ManyToOne
 	@JoinColumn(name = "cliente_id")
 	private Cliente cliente;
@@ -54,16 +53,10 @@ public class Pedido extends BaseAbstractEntyti implements Serializable {
 	@JoinColumn(name = "endereco_de_entregantrega_id")
 	private Endereco enderecoEntrega;
 
-	@OneToMany(mappedBy = "id.pedido")
-	private Set<ItemPedido> itens = new HashSet<>();
+	@JsonManagedReference
+	@OneToMany(mappedBy = "pedido")
+	private List<ItemPedido> itens = new ArrayList<>();
 
-	public List<Pedido> pedidos(){
-		 List<Pedido> lista=new ArrayList<>();
-		 
-		 for (ItemPedido x : itens) {
-			 lista.add(x.getPedido());
-			
-		}
-		 return lista;
-	}
+	
+	
 }

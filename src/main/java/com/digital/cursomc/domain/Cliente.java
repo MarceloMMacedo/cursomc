@@ -14,6 +14,7 @@ import javax.persistence.OneToMany;
 
 import com.digital.cursomc.domain.enums.converters.TipoClienteConverter;
 import com.digital.cursomc.domain.interfaces.BaseAbstractEntyti;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.Data;
@@ -44,7 +45,7 @@ public class Cliente extends BaseAbstractEntyti implements Serializable {
 	@CollectionTable(name ="TELEFONE")
 	private Set<String> telefones = new HashSet<>();
 	
-	@JsonManagedReference
+	@JsonBackReference
 	@OneToMany(mappedBy = "cliente")
 	private List<Pedido> pedidos=new ArrayList<Pedido>();
 	

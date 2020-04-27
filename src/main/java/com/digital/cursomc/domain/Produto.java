@@ -17,6 +17,8 @@ import javax.persistence.OneToMany;
 
 import com.digital.cursomc.domain.interfaces.BaseAbstractEntyti;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -41,7 +43,21 @@ public class Produto extends BaseAbstractEntyti implements Serializable {
 	@JoinTable(name = "PRODUTO_CATEGORIA", joinColumns = @JoinColumn(name = "produto_id"), inverseJoinColumns = @JoinColumn(name = "categotia_id"))
 	private List<Categoria> categorias = new ArrayList<>();
 
-	@OneToMany(mappedBy = "id.produto")
-	private Set<ItemPedido> itens = new HashSet<>();
+//	@JsonIgnore
+//	@OneToMany(mappedBy = "id.produto") 
+//	private Set<ItemPedido> itens = new HashSet<>();
+//	@JsonManagedReference
+//	@OneToMany(mappedBy = "produto")
+//	private List<ItemPedido> itens = new ArrayList<>();
 
+//	@JsonIgnore
+//	public List<Pedido> getPedidos() {
+//		List<Pedido> lista = new ArrayList<>();
+//
+//		for (ItemPedido x : itens) {
+//			lista.add(x.getPedido());
+//
+//		}
+//		return lista;
+//	}
 }

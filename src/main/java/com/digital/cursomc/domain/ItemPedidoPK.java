@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 
 @Embeddable
 @Data
-@EqualsAndHashCode
+// @EqualsAndHashCode
 //@AllArgsConstructor
 @NoArgsConstructor
 public class ItemPedidoPK  implements Serializable {

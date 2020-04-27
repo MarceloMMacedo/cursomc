@@ -2,38 +2,48 @@ package com.digital.cursomc.domain;
 
 import java.io.Serializable;
 
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+import com.digital.cursomc.domain.interfaces.BaseAbstractEntyti;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.NoArgsConstructor; 
 
-@Data
+
 @Entity
-//@AllArgsConstructor
+@Data
 @NoArgsConstructor
-
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class ItemPedido implements Serializable {
+//@AllArgsConstructor
+@EqualsAndHashCode(callSuper = true)
+public class ItemPedido extends BaseAbstractEntyti  implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	@EmbeddedId
-	@EqualsAndHashCode.Include
-	private ItemPedidoPK id = new ItemPedidoPK();
-	
+//	@JsonIgnore
+//	@EmbeddedId
+////	@EqualsAndHashCode.Include
+//	private ItemPedidoPK id = new ItemPedidoPK();
+
 	private Double desconto;
-	
+
 	private Integer quantidade;
-	
+
 	private Double preco;
+	
+	
+	@JsonBackReference
+	@ManyToOne
+	@JoinColumn(name = "pedido_id")
+	private Pedido pedido;
+	
+	
+	@ManyToOne
+	@JoinColumn(name = "produto_id")
+	private Produto produto;
 
-	public Produto getProduto() {
-		return id.getProduto();
-	}
-
-	public Pedido getPedido() {
-		return id.getPedido();
-	}
+//	
 }
