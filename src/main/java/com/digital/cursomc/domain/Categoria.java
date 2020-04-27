@@ -30,8 +30,7 @@ public class Categoria extends BaseAbstractEntyti implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	  
-	
-	@JsonManagedReference
+	 
 	@ManyToMany(mappedBy = "categorias")
 	private List<Produto> produtos=new ArrayList<Produto>();
 

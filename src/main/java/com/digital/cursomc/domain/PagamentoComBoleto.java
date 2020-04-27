@@ -25,6 +25,7 @@ public class PagamentoComBoleto extends Pagamento implements Serializable {
 	@JsonFormat(pattern = "dd/MM/yyyy")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date datavencimento;
+	
 	@JsonFormat(pattern = "dd/MM/yyyy")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date datapagamento;

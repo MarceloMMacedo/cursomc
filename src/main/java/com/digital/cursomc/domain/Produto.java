@@ -38,7 +38,7 @@ public class Produto extends BaseAbstractEntyti implements Serializable {
 
 	private double preco;
 
-	@JsonBackReference
+	@JsonIgnore
 	@ManyToMany
 	@JoinTable(name = "PRODUTO_CATEGORIA", joinColumns = @JoinColumn(name = "produto_id"), inverseJoinColumns = @JoinColumn(name = "categotia_id"))
 	private List<Categoria> categorias = new ArrayList<>();

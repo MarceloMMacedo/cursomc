@@ -15,6 +15,7 @@ import javax.persistence.OneToMany;
 import com.digital.cursomc.domain.enums.converters.TipoClienteConverter;
 import com.digital.cursomc.domain.interfaces.BaseAbstractEntyti;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.Data;
@@ -36,7 +37,7 @@ public class Cliente extends BaseAbstractEntyti implements Serializable {
 	@Convert(converter = TipoClienteConverter.class)
 	private String tipo;
 	
-	@JsonManagedReference
+	
 	@OneToMany(mappedBy = "cliente")
 	private List<Endereco> enderecos=new ArrayList<Endereco>();
 	
@@ -45,7 +46,7 @@ public class Cliente extends BaseAbstractEntyti implements Serializable {
 	@CollectionTable(name ="TELEFONE")
 	private Set<String> telefones = new HashSet<>();
 	
-	@JsonBackReference
+	@JsonIgnore
 	@OneToMany(mappedBy = "cliente")
 	private List<Pedido> pedidos=new ArrayList<Pedido>();
 	

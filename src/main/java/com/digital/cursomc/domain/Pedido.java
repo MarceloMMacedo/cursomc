@@ -1,7 +1,9 @@
 package com.digital.cursomc.domain;
 
 import java.io.Serializable;
-import java.util.*; 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Convert;
@@ -15,9 +17,8 @@ import javax.persistence.TemporalType;
 
 import com.digital.cursomc.domain.enums.converters.EstadoPagamentoConverter;
 import com.digital.cursomc.domain.interfaces.BaseAbstractEntyti;
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -39,21 +40,22 @@ public class Pedido extends BaseAbstractEntyti implements Serializable {
 	@Convert(converter = EstadoPagamentoConverter.class)
 	private String estado;
 
-	@JsonManagedReference
+	 
 	@OneToOne(cascade = CascadeType.ALL, mappedBy = "pedido")
 	private Pagamento pagamento;
 
-	@JsonManagedReference
+	 
 	@ManyToOne
 	@JoinColumn(name = "cliente_id")
 	private Cliente cliente;
 
-	@JsonBackReference
+	
+
 	@ManyToOne
 	@JoinColumn(name = "endereco_de_entregantrega_id")
 	private Endereco enderecoEntrega;
 
-	@JsonManagedReference
+	 
 	@OneToMany(mappedBy = "pedido")
 	private List<ItemPedido> itens = new ArrayList<>();
 

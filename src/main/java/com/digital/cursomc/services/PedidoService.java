@@ -20,5 +20,13 @@ public class PedidoService {
 		return Optional.ofNullable(obj.orElseThrow(() -> new ObjectNotFoundException(
 				"Objeto não encontrado! Id: " + id + ", Tipo: " + Pedido.class.getSimpleName())));
 	}
+	
+	
+	public Optional<Pedido> save(Pedido obj_) throws ObjectNotFoundException{
+		Pedido  p= pedidoRepository.save(obj_);
+		Optional<Pedido> obj =Optional.of(p);
+		
+		return Optional.ofNullable(obj.orElseThrow(() -> new ObjectNotFoundException("Erro Salvar Pedido")));
+	}
 
 }
