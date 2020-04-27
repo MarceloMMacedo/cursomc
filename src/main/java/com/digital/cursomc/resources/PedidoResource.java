@@ -1,6 +1,5 @@
 package com.digital.cursomc.resources;
 
-import java.util.Date;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,16 +9,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.digital.cursomc.domain.Categoria;
-import com.digital.cursomc.domain.PagamentoComBoleto;
+import com.digital.cursomc.domain.PagamentoComCartao;
 import com.digital.cursomc.domain.Pedido;
+import com.digital.cursomc.domain.enums.EstadoPagamento;
 import com.digital.cursomc.repositories.ClienteRepository;
 import com.digital.cursomc.repositories.PagamentoRepository;
 import com.digital.cursomc.services.PedidoService;
 
 import javassist.tools.rmi.ObjectNotFoundException;
-
-import com.digital.cursomc.services.*;
 
 @RestController
 @RequestMapping(value = "/pedidos")
@@ -37,8 +34,9 @@ public class PedidoResource {
 		Optional<Pedido> obj = pedidoService.buscar(id);
 		
 		Pedido p = new Pedido();
-		PagamentoComBoleto boleto = new PagamentoComBoleto();
-		boleto.setDatavencimento(new Date());
+		PagamentoComCartao boleto = new PagamentoComCartao();
+		boleto.setNumerodeParcelas(6);
+		boleto.setEstado(EstadoPagamento.CANCELADO.getDescricao());
 		boleto.setPedido(p);
 		p.setPagamento(boleto);
 		
