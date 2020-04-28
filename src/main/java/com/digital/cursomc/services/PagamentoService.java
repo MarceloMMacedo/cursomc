@@ -15,7 +15,7 @@ public class PagamentoService {
 	@Autowired
 	private PagamentoRepository repo;
 
-	public Optional<Pagamento> buscar(long id) throws ObjectNotFoundException {
+	public Optional<Pagamento> buscar(Integer id) throws ObjectNotFoundException {
 		Optional<Pagamento> obj = repo.findById(id);
 		return Optional.ofNullable(obj.orElseThrow(() -> new ObjectNotFoundException(
 				"Objeto não encontrado! Id: " + id + ", Tipo: " + Pagamento.class.getSimpleName())));

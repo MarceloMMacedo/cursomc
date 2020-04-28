@@ -12,7 +12,7 @@ import   com.digital.cursomc.domain.*;
 public class CategoriaDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
-	private Long id;
+	private Integer id;
 	 
 	@NotEmpty(message="Preenchimento obrigatório")
 	@Length(min=5, max=80, message="O tamanho deve ser entre 5 e 80 caracteres")
@@ -26,11 +26,11 @@ public class CategoriaDTO implements Serializable {
 		nome = obj.getNome();
 	}
 
-	public Long getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

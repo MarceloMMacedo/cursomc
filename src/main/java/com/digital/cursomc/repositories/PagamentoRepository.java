@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.digital.cursomc.domain.Pagamento;
 
 @Repository
-public interface PagamentoRepository extends JpaRepository<Pagamento, Long> {
+public interface PagamentoRepository extends JpaRepository<Pagamento, Integer> {
  
 //	Pagamento findById(long id);
 }

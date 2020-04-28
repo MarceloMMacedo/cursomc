@@ -30,21 +30,21 @@ public class PedidoResource {
 	private PagamentoRepository pagamentoRepository;
 
 	@GetMapping("/{id}")
-	public ResponseEntity<?> find(@PathVariable(value = "id") Long id) throws ObjectNotFoundException {
+	public ResponseEntity<?> find(@PathVariable(value = "id") Integer id) throws ObjectNotFoundException {
 		Optional<Pedido> obj = pedidoService.buscar(id);
 		
-		Pedido p = new Pedido();
-		PagamentoComCartao boleto = new PagamentoComCartao();
-		boleto.setNumerodeParcelas(6);
-		boleto.setEstado(EstadoPagamento.CANCELADO.getDescricao());
-		boleto.setPedido(p);
-		p.setPagamento(boleto);
-		
-		p.setCliente(clienteRepository.findById(1L).get());
-		
-		p.setEnderecoEntrega(p.getCliente().getEnderecos().get(0));
-
-		pedidoService.save( p);
+//		Pedido p = new Pedido();
+//		PagamentoComCartao boleto = new PagamentoComCartao();
+//		boleto.setNumerodeParcelas(6);
+//		boleto.setEstado(EstadoPagamento.CANCELADO.getDescricao());
+//		boleto.setPedido(p);
+//		p.setPagamento(boleto);
+//		
+//		p.setCliente(clienteRepository.findById(1L).get());
+//		
+//		p.setEnderecoEntrega(p.getCliente().getEnderecos().get(0));
+//
+//		pedidoService.save( p);
 		return ResponseEntity.ok(obj);
 	}
 }

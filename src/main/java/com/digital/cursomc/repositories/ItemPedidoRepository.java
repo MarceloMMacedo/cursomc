@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.digital.cursomc.domain.ItemPedido;
 
 @Repository
-public interface ItemPedidoRepository extends JpaRepository<ItemPedido, Long> {
+public interface ItemPedidoRepository extends JpaRepository<ItemPedido, Integer> {
  
 //	ItemPedido findById(long id);
 }

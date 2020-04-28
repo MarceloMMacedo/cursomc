@@ -22,7 +22,7 @@ public class CategoriaService {
 	@Autowired
 	private CategoriaRepository repo;
 
-	public  Categoria  find(Long id) throws ObjectNotFoundException  {
+	public  Categoria  find(Integer id) throws ObjectNotFoundException  {
 		Categoria obj = repo.findById(id).get();
 		if (obj == null) {
 			throw new ObjectNotFoundException(
@@ -41,7 +41,7 @@ public class CategoriaService {
 		return repo.save(obj);
 	}
 
-	public void delete(Long id) throws ObjectNotFoundException {
+	public void delete(Integer id) throws ObjectNotFoundException {
 		 Categoria   obj = find(id);
 		try {
 			repo.delete(obj );

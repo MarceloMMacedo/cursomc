@@ -36,7 +36,7 @@ public class CategoriaResource {
 	private CategoriaService service;
 
 	@GetMapping("/{id}")
-	public ResponseEntity<?> find(@PathVariable(value = "id") long id) throws ObjectNotFoundException {
+	public ResponseEntity<?> find(@PathVariable(value = "id") Integer id) throws ObjectNotFoundException {
 		Categoria obj = service.find(id);
 		return ResponseEntity.ok(obj);
 	}
@@ -50,7 +50,7 @@ public class CategoriaResource {
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<Void> update(@Valid @RequestBody CategoriaDTO objDto, @PathVariable Long id)
+	public ResponseEntity<Void> update(@Valid @RequestBody CategoriaDTO objDto, @PathVariable Integer id)
 			throws ObjectNotFoundException {
 		Categoria obj = service.fromDto(objDto);
 		obj.setId(id);
@@ -59,7 +59,7 @@ public class CategoriaResource {
 	}
 
 	@DeleteMapping("/{id}")
-	public ResponseEntity<?> delete(@PathVariable(value = "id") Long id) throws ObjectNotFoundException {
+	public ResponseEntity<?> delete(@PathVariable(value = "id") Integer id) throws ObjectNotFoundException {
 		service.delete(id);
 		return ResponseEntity.noContent().build();
 	}

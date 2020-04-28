@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.digital.cursomc.domain.Estado;
 
 @Repository
-public interface EstadoRepository extends JpaRepository<Estado, Long> {
+public interface EstadoRepository extends JpaRepository<Estado, Integer> {
  
 //	Estado findById(long id);
 }

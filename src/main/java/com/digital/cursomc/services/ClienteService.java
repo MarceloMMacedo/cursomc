@@ -35,7 +35,7 @@ public class ClienteService {
 	@Autowired
 	private EnderecoRepository enderecoRepository;
 
-	public Cliente find(Long id) {
+	public Cliente find(Integer id) {
 
 //		UserSS user = UserService.authenticated();
 //		if (user == null || !user.hasRole(Perfil.ADMIN) && !id.equals(user.getId())) {
@@ -62,7 +62,7 @@ public class ClienteService {
 		return repo.save(obj);
 	}
 
-	public void delete(Long id) {
+	public void delete(Integer id) {
 		find(id);
 		try {
 			repo.delete(find(id));

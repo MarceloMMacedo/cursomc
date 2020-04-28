@@ -1,27 +1,32 @@
 package com.digital.cursomc.domain;
 
-import java.io.Serializable;
-import java.util.Date;
-
 import javax.persistence.Entity;
 
-import com.digital.cursomc.domain.interfaces.BaseAbstractEntyti;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
 @Entity
-@Data
-@NoArgsConstructor
-//@AllArgsConstructor
-@EqualsAndHashCode(callSuper = true)
-public class PagamentoComCartao extends Pagamento implements Serializable { 
- 
+@JsonTypeName("pagamentoComCartao")
+public class PagamentoComCartao extends Pagamento {
 	private static final long serialVersionUID = 1L;
 
-	 private  Integer numerodeParcelas; 
-	 
-	 
+	private Integer numeroDeParcelas;
 	
+	public PagamentoComCartao() {
+	}
 
+	public PagamentoComCartao(Integer id, String estado, Pedido pedido, Integer numeroDeParcelas) {
+		super(id, estado, pedido);
+		this.numeroDeParcelas = numeroDeParcelas;
+	}
+
+	public Integer getNumeroDeParcelas() {
+		return numeroDeParcelas;
+	}
+
+	public void setNumeroDeParcelas(Integer numeroDeParcelas) {
+		this.numeroDeParcelas = numeroDeParcelas;
+	}
+	
+	
+		
 }

@@ -34,7 +34,7 @@ public class ItemPedidoResource {
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<?> find(@PathVariable(value = "id") long id) throws ObjectNotFoundException {
+	public ResponseEntity<?> find(@PathVariable(value = "id") Integer id) throws ObjectNotFoundException {
 		Optional<ItemPedido> obj = ItemPedidoService.buscar(id);
 		return ResponseEntity.ok(obj) ;
 	}

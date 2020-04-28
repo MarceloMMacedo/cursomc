@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.digital.cursomc.domain.Cidade;
 
 @Repository
-public interface CidadeRepository extends JpaRepository<Cidade, Long> {
+public interface CidadeRepository extends JpaRepository<Cidade, Integer> {
  
 //	Cidade findById(long id);
 }

@@ -53,7 +53,7 @@ public class ClienteNewDTO implements Serializable {
 	
 	private String telefone3;
 
-	private Long cidadeId;
+	private Integer cidadeId;
 	
 	 
 }
