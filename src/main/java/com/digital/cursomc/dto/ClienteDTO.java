@@ -7,21 +7,22 @@ import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import com.digital.cursomc.domain.Cliente;
+import com.digital.cursomc.services.validation.ClienteUpdate;
 
-//@ClientEndpointnteUpdate
+@ClienteUpdate
 public class ClienteDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	private Long id;
-	
-	@NotEmpty(message="Preenchimento obrigatório")
-	@Length(min=5, max=120, message="O tamanho deve ser entre 5 e 120 caracteres")
+
+	@NotEmpty(message = "Preenchimento obrigatório")
+	@Length(min = 5, max = 120, message = "O tamanho deve ser entre 5 e 120 caracteres")
 	private String nome;
-	
-	@NotEmpty(message="Preenchimento obrigatório")
-	@Email(message="Email inválido")
+
+	@NotEmpty(message = "Preenchimento obrigatório")
+	@Email(message = "Email inválido")
 	private String email;
-	
+
 	public ClienteDTO() {
 	}
 
@@ -30,7 +31,7 @@ public class ClienteDTO implements Serializable {
 		nome = obj.getNome();
 		email = obj.getEmail();
 	}
-	
+
 	public Long getId() {
 		return id;
 	}
