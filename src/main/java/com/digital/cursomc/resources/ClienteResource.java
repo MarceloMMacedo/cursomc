@@ -45,10 +45,7 @@ public class ClienteResource {
 
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Void> insert(@Valid @RequestBody ClienteNewDTO objDto) {
-//		Cliente obj = service.fromDTO(objDto);
-//		Cliente obj = (Cliente) UtilParameter.clonarentity( objDto, new Cliente(), 
-//				new String[] { "nome", "email","tipo", }); 
-//		Cliente	obj = service.insert(service.fromDTO(objDto));
+
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(service.insert(service.fromDTO(objDto)).getId()).toUri();
 		return ResponseEntity.created(uri).build();
 	}
