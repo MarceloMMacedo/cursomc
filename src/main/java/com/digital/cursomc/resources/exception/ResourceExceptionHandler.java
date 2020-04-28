@@ -23,8 +23,7 @@ import com.digital.cursomc.services.exceptions.ObjectNotFoundException;
 public class ResourceExceptionHandler {
 	
 	@ExceptionHandler(NoSuchElementException.class)
-	public ResponseEntity<StandardError> dataIntegrity(NoSuchElementException e, HttpServletRequest request) {
-		
+	public ResponseEntity<StandardError> noSuchElementException(NoSuchElementException e, HttpServletRequest request) {		
 		StandardError err = new StandardError(System.currentTimeMillis(), HttpStatus.UNPROCESSABLE_ENTITY.value(), "Dado Inexistente", e.getMessage(), request.getRequestURI());
 		return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(err);
 	}

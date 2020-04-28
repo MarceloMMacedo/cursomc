@@ -4,6 +4,9 @@ import java.io.Serializable;
 
 import javax.persistence.Convert;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
@@ -28,7 +31,11 @@ public abstract class Pagamento extends BaseAbstractEntyti implements Serializab
 
 	private static final long serialVersionUID = 1L;
 	
-	 
+//
+//	@Id
+//	@GeneratedValue(strategy = GenerationType.IDENTITY)
+//	@EqualsAndHashCode.Include
+//	private Long id;
 	
 	@Convert(converter = EstadoPagamentoConverter.class)
 	private String estado;
