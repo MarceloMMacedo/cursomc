@@ -63,10 +63,12 @@ public class PedidoService {
 		obj.setCliente(clienteRepository.findById(obj.getCliente().getId()).get());
 		obj.getPagamento().setEstado(EstadoPagamento.PENEDETE.getDescricao());
 		obj.getPagamento().setPedido(obj);
+		
 		if (obj.getPagamento() instanceof PagamentoComBoleto) {
 			PagamentoComBoleto pagto = (PagamentoComBoleto) obj.getPagamento();
 			boletoService.preencherPagamentoComBoleto(pagto, obj.getInstante());
 		}
+		
 		obj = repo.save(obj);
 		pagamentoRepository.save(obj.getPagamento());
 		for (ItemPedido ip : obj.getItens()) {
@@ -76,7 +78,7 @@ public class PedidoService {
 			ip.setPedido(obj);
 		}
 		itemPedidoRepository.saveAll(obj.getItens());
-		repo.save(obj);
+		//repo.save(obj);
 //		emailService.sendOrderConfirmationEmail(obj);
 		return obj;
 	}
