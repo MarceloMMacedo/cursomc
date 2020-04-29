@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.text.NumberFormat;
 import java.util.Locale;
 
+import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 
@@ -12,15 +13,18 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 public class ItemPedido implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	@JsonIgnore
 	@EmbeddedId
 	private ItemPedidoPK id = new ItemPedidoPK();
-	
+
+	@Column(columnDefinition = "DOUBLE   NULL DEFAULT 0 ")
 	private Double desconto;
+	@Column(columnDefinition = "INT(11)   NULL DEFAULT 0")
 	private Integer quantidade;
+	@Column(columnDefinition = "DOUBLE  NULL DEFAULT 0 ")
 	private Double preco;
-	
+
 	public ItemPedido() {
 	}
 
@@ -34,26 +38,29 @@ public class ItemPedido implements Serializable {
 	}
 
 	public double getSubTotal() {
+		System.out.println(this.desconto);
+		System.out.println(quantidade);
+		System.out.println(preco);
 		return (preco - desconto) * quantidade;
 	}
-	
+
 	@JsonIgnore
 	public Pedido getPedido() {
 		return id.getPedido();
 	}
-	
+
 	public void setPedido(Pedido pedido) {
 		id.setPedido(pedido);
 	}
-	
+
 	public Produto getProduto() {
 		return id.getProduto();
 	}
-	
+
 	public void setProduto(Produto produto) {
 		id.setProduto(produto);
 	}
-	
+
 	public ItemPedidoPK getId() {
 		return id;
 	}

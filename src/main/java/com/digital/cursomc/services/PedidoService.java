@@ -60,7 +60,7 @@ public class PedidoService {
 	public Pedido insert(Pedido obj) {
 		obj.setId(null);
 		obj.setInstante(new Date());
-		obj.setCliente(clienteRepository.findById(obj.getCliente().getId()).get());
+		obj.getCliente().setId(obj.getCliente().getId());//;(clienteRepository.findById(obj.getCliente().getId()).get());
 		obj.getPagamento().setEstado(EstadoPagamento.PENEDETE.getDescricao());
 		obj.getPagamento().setPedido(obj);
 		
@@ -90,7 +90,7 @@ public class PedidoService {
 //		}
 		PageRequest pageRequest =   PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
  		Cliente cliente = null  ;//clienteRepository.findById(user.getId());
-		return repo.findByCliente(cliente, pageRequest);
+		return repo.findAll(pageRequest);// repo.findByCliente(cliente, pageRequest);
 	}
 }
 
