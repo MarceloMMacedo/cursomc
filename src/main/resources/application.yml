@@ -1,18 +1,18 @@
-spring: 
-  datasource:
-    password: masterkey
-    url: jdbc:mysql://localhost:3306/curso_spring?createDatabaseIfNotExist=true
-    username: root
-  h2:
-    console:
-      settings:
-        trace:  true  
-  jpa:
-    hibernate:
-      ddl-auto: update
-    show-sql: false
-  application:
-    name: digitalapi
+#spring: 
+#  datasource:
+#    password: masterkey
+#    url: jdbc:mysql://localhost:3306/curso_spring?createDatabaseIfNotExist=true
+#    username: root
+#  h2:
+#    console:
+#      settings:
+#        trace:  true  
+#  jpa:
+#    hibernate:
+#      ddl-auto: update
+#    show-sql: false
+#  application:
+#    name: digitalapi
 #  profiles:
 #    active:
 #    - dev
