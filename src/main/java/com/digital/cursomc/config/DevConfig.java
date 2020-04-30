@@ -9,6 +9,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
 import com.digital.cursomc.services.DBService;
+import com.digital.cursomc.services.EmailService;
+import com.digital.cursomc.services.SmtpEmailService;
 
 /* capturar uma chave de um arquibo properties comparar e executar uma operação*/
 
@@ -35,8 +37,8 @@ public class DevConfig {
 		}
 	}
 
-//	@Bean
-//	public EmailService emailService() {
-//		return new SmtpEmailService();
-//	}
+	@Bean
+	public EmailService emailService() {
+		return new SmtpEmailService();
+	}
 }

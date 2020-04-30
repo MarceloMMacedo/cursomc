@@ -21,37 +21,35 @@ import com.digital.cursomc.repositories.PedidoRepository;
 import com.digital.cursomc.repositories.ProdutoRepository;
 import com.digital.cursomc.services.exceptions.AuthorizationException;
 import com.digital.cursomc.services.exceptions.ObjectNotFoundException;
- 
 
 @Service
 public class PedidoService {
-	
+
 	@Autowired
 	private PedidoRepository repo;
-	
+
 	@Autowired
 	private BoletoService boletoService;
-	
+
 	@Autowired
 	private PagamentoRepository pagamentoRepository;
-	
+
 	@Autowired
 	private ProdutoRepository produtoRepository;
-	
+
 	@Autowired
 	private ItemPedidoRepository itemPedidoRepository;
-	
+
 	@Autowired
 	private ClienteRepository clienteRepository;
-	
+
 	@Autowired
 	private EmailService emailService;
-	
+
 	public Pedido find(Integer id) {
 		Pedido obj = repo.findById(id).get();
 		if (obj == null) {
-			throw new ObjectNotFoundException("Objeto não encontrado! Id: " + id
-					+ ", Tipo: " + Pedido.class.getName());
+			throw new ObjectNotFoundException("Objeto não encontrado! Id: " + id + ", Tipo: " + Pedido.class.getName());
 		}
 		return obj;
 	}
@@ -60,15 +58,15 @@ public class PedidoService {
 	public Pedido insert(Pedido obj) {
 		obj.setId(null);
 		obj.setInstante(new Date());
-		obj.getCliente().setId(obj.getCliente().getId());//;(clienteRepository.findById(obj.getCliente().getId()).get());
+		obj.setCliente(clienteRepository.findById(obj.getCliente().getId()).get());
 		obj.getPagamento().setEstado(EstadoPagamento.PENEDETE.getDescricao());
 		obj.getPagamento().setPedido(obj);
-		
+
 		if (obj.getPagamento() instanceof PagamentoComBoleto) {
 			PagamentoComBoleto pagto = (PagamentoComBoleto) obj.getPagamento();
 			boletoService.preencherPagamentoComBoleto(pagto, obj.getInstante());
 		}
-		
+
 		obj = repo.save(obj);
 		pagamentoRepository.save(obj.getPagamento());
 		for (ItemPedido ip : obj.getItens()) {
@@ -78,19 +76,18 @@ public class PedidoService {
 			ip.setPedido(obj);
 		}
 		itemPedidoRepository.saveAll(obj.getItens());
-		//repo.save(obj);
+		 repo.save(obj);
 		emailService.sendOrderConfirmationEmail(obj);
 		return obj;
 	}
-	
+
 	public Page<Pedido> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {
 //		UserSS user = UserService.authenticated();
 //		if (user == null) {
 //			throw new AuthorizationException("Acesso negado");
 //		}
-		PageRequest pageRequest =   PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
- 		Cliente cliente = null  ;//clienteRepository.findById(user.getId());
+		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
+		Cliente cliente = null;// clienteRepository.findById(user.getId());
 		return repo.findAll(pageRequest);// repo.findByCliente(cliente, pageRequest);
 	}
 }
-
