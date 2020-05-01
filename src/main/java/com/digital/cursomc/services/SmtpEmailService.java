@@ -3,9 +3,7 @@ package com.digital.cursomc.services;
 import java.util.HashMap;
 
 import javax.mail.internet.MimeMessage;
-
-import org.apache.commons.mail.EmailException;
-import org.apache.commons.mail.HtmlEmail;
+ 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
