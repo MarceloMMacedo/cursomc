@@ -20,6 +20,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.digital.cursomc.domain.enums.Perfil;
 import com.digital.cursomc.domain.enums.converters.TipoClienteConverter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -61,7 +62,7 @@ public class Cliente implements Serializable {
 //		addPerfil(Perfil.CLIENTE);
 //	}
 
-	public Cliente(Integer id, String nome, String email, String cpfOuCnpj, String tipo, String senha ) {
+	public Cliente(Integer id, String nome, String email, String cpfOuCnpj, String tipo, String senha  ) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -69,7 +70,7 @@ public class Cliente implements Serializable {
 		this.cpfOuCnpj = cpfOuCnpj;
 		this.tipo =  tipo ;
 		this.senha = senha;
-//		addPerfil(Perfil.CLIENTE);
+		addPerfil(Perfil.CLIENTE);
 	}
 
 	public Cliente() {
@@ -117,13 +118,13 @@ public class Cliente implements Serializable {
 		this.senha = senha;
 	}	
 
-//	public Set<Perfil> getPerfis() {
-//		return perfis.stream().map(x -> Perfil.toEnum(x)).collect(Collectors.toSet());
-//	}
-//	
-//	public void addPerfil(Perfil perfil) {
-//		perfis.add(perfil.getCod());
-//	}
+	public Set<Perfil> getPerfis() {
+		return perfis.stream().map(x -> Perfil.toEnum(x)).collect(Collectors.toSet());
+	}
+	
+	public void addPerfil(Perfil perfil) {
+		perfis.add(perfil.getCod());
+	}
 	
 	public List<Endereco> getEnderecos() {
 		return enderecos;
