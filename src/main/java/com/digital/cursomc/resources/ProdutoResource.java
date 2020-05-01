@@ -31,11 +31,11 @@ public class ProdutoResource {
 
 	 
 
-//	@GetMapping("/{id}")
-//	public ResponseEntity<?> find(@PathVariable(value = "id") Integer id) throws ObjectNotFoundException {
-//		Optional<Produto> obj = service.buscar(id);
-//		return ResponseEntity.ok(obj) ;
-//	}
+	@GetMapping("/{id}")
+	public ResponseEntity<?> find(@PathVariable(value = "id") Integer id) throws ObjectNotFoundException {
+		Optional<Produto> obj = service.buscar(id);
+		return ResponseEntity.ok(obj) ;
+	}
 	
 	@RequestMapping(method=RequestMethod.GET)
 	public ResponseEntity<Page<ProdutoDTO>> findPage(

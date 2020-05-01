@@ -14,10 +14,13 @@ import org.springframework.stereotype.Service;
 import com.digital.cursomc.domain.Cidade;
 import com.digital.cursomc.domain.Cliente;
 import com.digital.cursomc.domain.Endereco;
+import com.digital.cursomc.domain.enums.Perfil;
 import com.digital.cursomc.dto.ClienteNewDTO;
 import com.digital.cursomc.repositories.CidadeRepository;
 import com.digital.cursomc.repositories.ClienteRepository;
 import com.digital.cursomc.repositories.EnderecoRepository;
+import com.digital.cursomc.security.UserSS;
+import com.digital.cursomc.services.exceptions.AuthorizationException;
 import com.digital.cursomc.services.exceptions.DataIntegrityException;
 import com.digital.cursomc.services.util.UtilParameter;
 
@@ -38,10 +41,10 @@ public class ClienteService {
 
 	public Cliente find(Integer id) {
 
-//		UserSS user = UserService.authenticated();
-//		if (user == null || !user.hasRole(Perfil.ADMIN) && !id.equals(user.getId())) {
-//			throw new AuthorizationException("Acesso negado");
-//		}
+		UserSS user = UserService.authenticated();
+		if (user == null || !user.hasRole(Perfil.ADMIN) && !id.equals(user.getId())) {
+			throw new AuthorizationException("Acesso negado");
+		}
 
 		Cliente obj = repo.findById(id).get();
 		if (obj == null) {
