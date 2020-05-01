@@ -8,14 +8,12 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.digital.cursomc.domain.Categoria;
 import com.digital.cursomc.domain.Cidade;
 import com.digital.cursomc.domain.Cliente;
 import com.digital.cursomc.domain.Endereco;
-import com.digital.cursomc.domain.enums.TipoCliente;
-import com.digital.cursomc.dto.ClienteDTO;
 import com.digital.cursomc.dto.ClienteNewDTO;
 import com.digital.cursomc.repositories.CidadeRepository;
 import com.digital.cursomc.repositories.ClienteRepository;
@@ -28,6 +26,9 @@ public class ClienteService {
 
 	@Autowired
 	private ClienteRepository repo;
+	
+	@Autowired
+	private BCryptPasswordEncoder be;
 
 	@Autowired
 	private CidadeRepository cidadeRepository;
@@ -84,10 +85,12 @@ public class ClienteService {
 		Optional<Cidade> cid = cidadeRepository.findById(objDto.getCidadeId());
 		Endereco endereco = (Endereco) UtilParameter.clonarentity(objDto, new Endereco(),
 				new String[] { "contato", "logradouro", "numero", "complemento", "bairro", "cep" });
+		
 		endereco.setCidade(cid.get());
 
 		Cliente cli = (Cliente) UtilParameter.clonarentity(objDto, new Cliente(),
 				new String[] { "nome", "email", "tipo", });
+		cli.setSenha(be.encode(objDto.getSenha()));
 		endereco.setCliente(cli);
 		cli.getEnderecos().add(endereco);
 
