@@ -63,6 +63,7 @@ public abstract class AbstractEmailService implements EmailService {
 		sendEmail(sm);
 	}
 
+	//preparar email
 	protected SimpleMailMessage prepareNewPasswordEmail(Cliente cliente, String newPass) {
 		SimpleMailMessage sm = new SimpleMailMessage();
 		sm.setTo(cliente.getEmail());
@@ -99,14 +100,14 @@ public abstract class AbstractEmailService implements EmailService {
 	protected MimeMessage prepareMemilMessageFromPedido(Pedido obj) throws MessagingException {
 		MimeMessage mimeMessage = javaMailSender.createMimeMessage();
 		MimeMessageHelper mmh = null;
-		 
-			mmh = new MimeMessageHelper(mimeMessage, true);
-			mmh.setTo(obj.getCliente().getEmail());
-			mmh.setFrom(sender);// remetente
-			mmh.setSubject("Pedido confirmado! Código: " + obj.getId());
-			mmh.setSentDate(new Date(System.currentTimeMillis()));
-			mmh.setText(htmlFromTemplatePedido(obj),true);
-		 
+
+		mmh = new MimeMessageHelper(mimeMessage, true);
+		mmh.setTo(obj.getCliente().getEmail());
+		mmh.setFrom(sender);// remetente
+		mmh.setSubject("Pedido confirmado! Código: " + obj.getId());
+		mmh.setSentDate(new Date(System.currentTimeMillis()));
+		mmh.setText(htmlFromTemplatePedido(obj), true);
+
 		return mmh.getMimeMessage();
 	}
 }
