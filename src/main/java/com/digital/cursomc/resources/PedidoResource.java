@@ -32,7 +32,7 @@ public class PedidoResource {
 	@Autowired
 	private PagamentoRepository pagamentoRepository;
 
-	@PreAuthorize("hasAnyRole('ADMIN') or hasAnyRole('CLIENTE')")
+//	@PreAuthorize("hasAnyRole('ADMIN') or hasAnyRole('CLIENTE')")
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<Pedido> find(@PathVariable Integer id) {
 		Pedido obj = service.find(id);

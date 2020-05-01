@@ -19,6 +19,7 @@ import com.digital.cursomc.repositories.ItemPedidoRepository;
 import com.digital.cursomc.repositories.PagamentoRepository;
 import com.digital.cursomc.repositories.PedidoRepository;
 import com.digital.cursomc.repositories.ProdutoRepository;
+import com.digital.cursomc.security.UserSS;
 import com.digital.cursomc.services.exceptions.AuthorizationException;
 import com.digital.cursomc.services.exceptions.ObjectNotFoundException;
 
@@ -82,12 +83,12 @@ public class PedidoService {
 	}
 
 	public Page<Pedido> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {
-//		UserSS user = UserService.authenticated();
-//		if (user == null) {
-//			throw new AuthorizationException("Acesso negado");
-//		}
+		UserSS user = UserService.authenticated();
+		if (user == null) {
+			throw new AuthorizationException("Acesso negado");
+		}
 		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
-		Cliente cliente = null;// clienteRepository.findById(user.getId());
-		return repo.findAll(pageRequest);// repo.findByCliente(cliente, pageRequest);
+		Cliente cliente =  clienteRepository.findById(user.getId()).get();
+		return repo.findByCliente(cliente, pageRequest);
 	}
 }
