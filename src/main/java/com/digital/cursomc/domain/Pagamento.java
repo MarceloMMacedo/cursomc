@@ -23,6 +23,7 @@ public abstract class Pagamento implements Serializable {
 	
 	@Id
 	private Integer id;
+	
 	@Convert(converter = EstadoPagamentoConverter.class)
 	private String estado;
 

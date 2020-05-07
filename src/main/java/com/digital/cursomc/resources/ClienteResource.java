@@ -1,12 +1,16 @@
 package com.digital.cursomc.resources;
 
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,6 +27,13 @@ import com.digital.cursomc.dto.ClienteDTO;
 import com.digital.cursomc.dto.ClienteNewDTO;
 import com.digital.cursomc.services.ClienteService;
 import com.digital.cursomc.services.util.UtilParameter;
+import com.google.auth.Credentials;
+import com.google.auth.oauth2.GoogleCredentials;
+import com.google.cloud.storage.Blob;
+import com.google.cloud.storage.Bucket;
+import com.google.cloud.storage.BucketInfo;
+import com.google.cloud.storage.Storage;
+import com.google.cloud.storage.StorageOptions;
 
 @RestController
 @RequestMapping(value = "/clientes")
@@ -30,6 +41,10 @@ import com.digital.cursomc.services.util.UtilParameter;
 public class ClienteResource {
 	@Autowired
 	private ClienteService service;
+	 
+
+	
+	
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<Cliente> find(@PathVariable Integer id) {
@@ -37,11 +52,11 @@ public class ClienteResource {
 		return ResponseEntity.ok().body(obj);
 	}
 
-//	@RequestMapping(value="/email", method=RequestMethod.GET)
-//	public ResponseEntity<Cliente> find(@RequestParam(value="value") String email) {
-//		Cliente obj = service.findByEmail(email);
-//		return ResponseEntity.ok().body(obj);
-//	}
+	@RequestMapping(value="/email", method=RequestMethod.GET)
+	public ResponseEntity<Cliente> find(@RequestParam(value="value") String email) {
+		Cliente obj = service.findByEmail(email);
+		return ResponseEntity.ok().body(obj);
+	}
 
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Void> insert(@Valid @RequestBody ClienteNewDTO objDto) {
@@ -70,6 +85,28 @@ public class ClienteResource {
 //	@PreAuthorize("hasAnyRole('ADMIN')")
 	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<List<ClienteDTO>> findAll() {
+		
+		
+		
+//		Credentials credentials = null;
+//		System.out.println(request.getServletContext().getRealPath("cursomc/src/main/java/com/digital/cursomc/security/digitalservice-276210-3d22ac4d643c.json"));
+//		
+//		try {
+//			  credentials = GoogleCredentials
+//					  .fromStream(new FileInputStream(request.getServletContext().getRealPath("cursomc/src/main/java/com/digital/cursomc/security/digitalservice-276210-3d22ac4d643c.json")));
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		Storage storage = StorageOptions.newBuilder().setCredentials(credentials)
+//				  .setProjectId("digitalservice").build().getService();
+		
+//		Bucket bucket_ = storage.create(BucketInfo.of(bucket));
+//		String value = "Hello, World!";
+//		byte[] bytes = value.getBytes();
+//		storage.
+//		bucket_.create("my-first-blob", bytes);
+		
 		List<Cliente> list = service.findAll();
 		List<ClienteDTO> listDto = list.stream().map(obj -> new ClienteDTO(obj)).collect(Collectors.toList());
 		return ResponseEntity.ok().body(listDto);
@@ -86,9 +123,12 @@ public class ClienteResource {
 		return ResponseEntity.ok().body(listDto);
 	}
 
-//	@RequestMapping(value="/picture", method=RequestMethod.POST)
-//	public ResponseEntity<Void> uploadProfilePicture(@RequestParam(name="file") MultipartFile file) {
-//		URI uri = service.uploadProfilePicture(file);
-//		return ResponseEntity.created(uri).build();
-//	}
+	@RequestMapping(value="/picture", method=RequestMethod.POST)
+	public ResponseEntity<Void> uploadProfilePicture(@RequestParam(name="file") MultipartFile file) {
+		URI uri = service.uploadProfilePicture(file);
+		return ResponseEntity.created(uri).build();
+	}
+	
+	
+	
 }

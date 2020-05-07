@@ -20,7 +20,7 @@ public class JWTUtil {
 	
 	public String generateToken(String username) {
 		return Jwts.builder()
-				.setSubject(username)
+				.setSubject(username)// email para gerar o token
 				.setExpiration(new Date(System.currentTimeMillis() + expiration))
 				.signWith(SignatureAlgorithm.HS512, secret.getBytes())
 				.compact();

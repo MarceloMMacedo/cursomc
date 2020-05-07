@@ -29,7 +29,7 @@ import com.digital.cursomc.repositories.EstadoRepository;
 import com.digital.cursomc.repositories.ItemPedidoRepository;
 import com.digital.cursomc.repositories.PagamentoRepository;
 import com.digital.cursomc.repositories.PedidoRepository;
-import com.digital.cursomc.repositories.ProdutoRepository;
+import com.digital.cursomc.repositories.ProdutoRepository; 
 
 @SpringBootApplication
 public class CursomcApplication implements CommandLineRunner{
@@ -55,15 +55,14 @@ public class CursomcApplication implements CommandLineRunner{
 	private PedidoRepository pedidoRepository;
 	@Autowired
 	private PagamentoRepository pagamentoRepository;
-	@Autowired
-	private ItemPedidoRepository itemPedidoRepository;
+//	@Autowired
+//	private S3Service s3Service;
 
 	
 	@Override
 	public void run(String... args) throws Exception {
-		// TODO Auto-generated method stub
-//
-//		
+//		System.out.println("wwwww");
+//	s3Service.uploadFile("Users/macedo/Pictures/IMG_20190726_195353.jpg");	
 		 
 		
 	}
